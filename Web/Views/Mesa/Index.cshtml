@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Infraestructure.Models.Mesa>
+
+@{
+    ViewBag.Title = "Listado de mesas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="listas text-center ">
+    <div class="card_lista">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-sm-4 mb-10">
+                    <div class="card text-center card_detalle">
+
+                        <h4 class="card-title text-center">
+                            Mesa #@Html.DisplayFor(modelItem => item.NumeroMesa)
+
+                        </h4><span class="small text-muted text-center"><b>Restaurante: </b>@Html.DisplayFor(modelItem => item.Restaurante.Nombre)</span>
+                        <p class="small text-muted text-center"><b>Capacidad:</b> @Html.DisplayFor(modelItem => item.Capacidad) personas</p>
+
+                        <img class="card-img-top center" src="../../Content/Public/img/mesa.jpg" alt="Card image" style="width:50%">
+                        <div class="card-body text-center">
+                            <p class="card-text">Mesa esta @Html.DisplayFor(modelItem => item.EstadoMesa.Descripcion)</p>
+                            <a href="#" class="btn btn-warning mb-10">Reservar</a>
+                            <a href="#" class="btn btn-success mb-10">Ocupada</a>
+                            <a href="#" class="btn btn-danger mb-10">Cerrar Cuenta</a>
+                        </div>
+                        <div class="card-footer d-grid">
+                            <a>@Html.ActionLink("Detalles", "Details", new { id = item.Id })</a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

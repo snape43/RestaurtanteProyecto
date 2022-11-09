@@ -1,0 +1,105 @@
+﻿@model Infraestructure.Models.Mesa
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal card_detalle">
+        <h4 class="titulos sub_title">Mesa</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <div class="control-label pd-6">
+                        <span>Restaurante</span>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.IdRestaurante,
+                       (SelectList)ViewBag.IdRestaurantes,
+                       "Selecione un Restaurante",
+                       htmlAttributes: new { @class = "form-control pd-6" })
+                        @Html.ValidationMessageFor(model => model.IdRestaurante, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <div class="control-label pd-6">
+                        <span>Número de mesa</span>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NumeroMesa, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NumeroMesa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <div class="control-label pd-6">
+                        <span>Capacidad</span>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Capacidad, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Capacidad, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <div class="control-label pd-6">
+                        <span>Estado</span>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                    </div>
+                    @*@Html.DropDownListFor(model => model.IdEstadoMesa,
+                        (SelectList)ViewBag.IdEstadoMesa,
+                        "Selecione un estado",
+                        htmlAttributes: new { @class = "form-control pd-6" })
+                         @Html.ValidationMessageFor(model => model.IdEstadoMesa, "", new { @class = "text-danger" })*@
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-warning mt-4" />
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.IdEstadoMesa, "IdEstadoMesa", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdEstadoMesa", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdEstadoMesa, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+}
+
+<div class="btn btn-secondary mt-4 float-end">
+    @Html.ActionLink("Volver a la lista", "IndexAdmin", null, new { @class = " color_white" })
+</div>

@@ -1,0 +1,60 @@
+﻿@model Infraestructure.Models.Producto
+
+@{
+    ViewBag.Title = "Detalle del producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="titulos">@ViewBag.Title</h2>
+
+<div class="card_detalle">
+    <h4 class="titulos sub_title">Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Nombre del producto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingredientes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingredientes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            ₡@Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+        @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            Categoría
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoriaProducto.NombreCategoria)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Regresar a la lista de Productos", "Index", null, new { @class = "btn btn-secondary float-end mt-4 mb-4" })
+</p>

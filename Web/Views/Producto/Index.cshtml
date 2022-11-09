@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Infraestructure.Models.Producto>
+
+@{
+    ViewBag.Title = "Lista de Productos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="titulos">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div class="listas text-center ">
+    <div class="card_lista">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-md-4 mb-10">
+                    <div class="card h-100 card_detalle">
+                        @*<img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Imagen)"
+                            alt="Imagen @Html.DisplayFor(modelItem => item.Nombre)" class="img-thumbnail" />*@
+                        <img src="https://via.placeholder.com/50x25" alt="Alternate Text" />
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Descripcion)</h5>
+                            <p class="card-text"> <b>Categoría: </b>@Html.DisplayFor(modelItem => item.CategoriaProducto.NombreCategoria)</p>
+                     
+                            @*<h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayNameFor(model => model.Autor): @Html.DisplayFor(modelItem => item.Autor.Nombre)</h6>*@
+                            @*<h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.CategoriaProducto)</h6>*@
+                            <p class="card-text">   @Html.DisplayNameFor(model => model.Precio): ₡@Html.DisplayFor(modelItem => item.Precio)</p>
+                        </div>
+                        <div class="card-footer d-grid">
+                            <a>@Html.ActionLink("Detalles", "Details", new { id = item.Id })</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+</div>
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredientes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoriaProducto.NombreCategoria)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Foto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredientes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaProducto.NombreCategoria)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }*@

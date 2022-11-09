@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>La Exquisita</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../Content/Public/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="pagewrap">
+        <nav id='menu'>
+            <div class="container">
+                <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+                <ul>
+                    <li><a>@Html.ActionLink("LA EXQUISITA", "Index", "Home") </a></li>
+                    <li>
+                        <a class='dropdown-arrow'>Menu</a>
+                        <ul class='sub-menus'>
+                            <li><a>@Html.ActionLink("Productos", "Index", "Producto")</a></li>
+                           
+                        </ul>
+                    </li>
+                    <li><a>@Html.ActionLink("Mesas", "Index", "Mesa") </a></li>
+                    <li><a>@Html.ActionLink("Pedidos", "Index", "Pedido") </a></li>
+
+
+                    <li>
+                        <a class='dropdown-arrow'>Mantenimientos</a>
+                        <ul class='sub-menus'>
+                            <li><a>@Html.ActionLink("Producto",  "IndexAdmin" ,"Producto") </a></li>
+                            <li><a>@Html.ActionLink("Mesa", "IndexAdmin", "Mesa") </a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class='dropdown-arrow'>Información</a>
+                        <ul class='sub-menus'>
+                            <li><a>@Html.ActionLink("Acerca de nosotros", "About", "Home") </a></li>
+                            <li><a href='http://'>Contacto</a></li>
+                        </ul>
+                    </li>
+
+
+
+
+                    <li class="rightItems"><a>Usuario</a></li>
+                    <li class="rightItems"><a>Salir</a></li>
+
+                </ul>
+
+
+
+
+
+            </div>
+
+        </nav>
+
+        <main>
+            <div class="container body-content">
+                @RenderBody()
+            </div>
+        </main>
+        <footer class="text-center mt-5">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+
+</body>
+@RenderSection("Scripts", required: false)
+
+</html>

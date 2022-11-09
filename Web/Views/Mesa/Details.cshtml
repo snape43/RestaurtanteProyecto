@@ -1,0 +1,51 @@
+﻿@model Infraestructure.Models.Mesa
+
+@{
+    ViewBag.Title = "Detalle de la mesa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="titulos">@ViewBag.Title</h2>
+
+<div class="card_detalle">
+    <h4 class="titulos sub_title">Mesa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Número de la mesa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroMesa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacidad)
+        </dd>
+
+        <dt>
+            Estado de la mesa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoMesa.Descripcion)
+        </dd>
+
+        <dt>
+            Nombre del Restaurante
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Restaurante.Nombre)
+        </dd>
+       
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Regresar a la lista de mesas", "Index")
+</p>

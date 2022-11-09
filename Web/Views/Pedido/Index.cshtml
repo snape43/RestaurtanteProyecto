@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Infraestructure.Models.Pedido>
+
+@{
+    ViewBag.Title = "Lista de pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="titulos">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div class="listas text-center ">
+    <div class="card_lista">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-md-4 mb-10">
+                    <div class="card h-100 card_detalle">
+                        @*<img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Imagen)"
+                            alt="Imagen @Html.DisplayFor(modelItem => item.Nombre)" class="img-thumbnail" />*@
+                        <h2 class="card-text"><b>Pedido número: </b>@Html.DisplayFor(modelItem => item.Id)</h2>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.FechaPedido)</p>
+
+                        <div>
+                            <img src="~/Content/Public/img/pedido.jpg" class="align-content-center img-thumbnail" width="200" height="200" alt="Alternate Text" />
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="card_detalle">
+
+                                <p class="card-text"><b>Restaurante: </b>@Html.DisplayFor(modelItem => item.Mesa.Restaurante.Nombre)</p>
+
+                                <p class="card-text"><b>Estado: </b>@Html.DisplayFor(modelItem => item.EstadoPedido.Descripcion)</p>
+                                <b><p class="card-text">  @Html.DisplayFor(modelItem => item.Observaciones)</p></b> 
+                            </div>
+
+                            @*<h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayNameFor(model => model.Autor): @Html.DisplayFor(modelItem => item.Autor.Nombre)</h6>*@
+                          
+                        </div>
+                        <div class="card-footer d-grid ">
+
+                            <a class="primary_button">@Html.ActionLink("Detalles", "Details", new { id = item.Id })</a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

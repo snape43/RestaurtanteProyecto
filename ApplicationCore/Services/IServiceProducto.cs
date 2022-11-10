@@ -12,7 +12,7 @@ namespace ApplicationCore.Services
         IEnumerable<Producto> GetProducto();
         Producto GetProductoByID(int id);
         IEnumerable<string> GetProductoNombres();
-        Producto Save(Producto producto, string[] selectedCategorias);
+        Producto Save(Producto producto);
 
     }
 }

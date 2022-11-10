@@ -27,10 +27,10 @@ namespace ApplicationCore.Services
             IRepositoryProducto repository = new RepositoryProducto();
             return repository.GetProducto().Select(x => x.Descripcion);
         }
-        public Producto Save(Producto producto, string[] selectedCategorias)
+        public Producto Save(Producto producto)
         {
             IRepositoryProducto repository = new RepositoryProducto();
-            return repository.Save(producto, selectedCategorias);
+            return repository.Save(producto);
         }
 
     }

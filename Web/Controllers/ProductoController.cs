@@ -142,7 +142,7 @@ namespace Web.Controllers
 
         // POST: Producto/Create
         [HttpPost]
-        public ActionResult Create(Producto producto, HttpPostedFileBase ImageFile, string[] selectedCategorias)
+        public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile)
         {
 
             MemoryStream target = new MemoryStream();
@@ -158,16 +158,15 @@ namespace Web.Controllers
                         producto.Foto = target.ToArray();
                         ModelState.Remove("Foto");
                     }
-
                 }
                 if (ModelState.IsValid)
                 {
-                    Producto oProductoI = _ServiceProducto.Save(producto, selectedCategorias);
+                    Producto oProductoI = _ServiceProducto.Save(producto);
                 }
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
-                    //     Utils.Util.ValidateErrors(this);
+               //     Utils.Util.ValidateErrors(this);
                     ViewBag.IdCategoria = listaCategorias(producto.IdCategoriaProducto);
                     return View("Create", producto);
                 }
@@ -178,7 +177,7 @@ namespace Web.Controllers
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
+                TempData["Redirect"] = "Producto";
                 TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
@@ -212,8 +211,8 @@ namespace Web.Controllers
                 //CategoriaProducto
                 //ViewBag.IdRestaurantes = listaRestaurantes(Producto.IdCategoriaProducto);
 
-                ////Categorías
-                //ViewBag.IdCategoria = listaCategorias(Producto.IdCategoriaProducto);
+                //Categorías
+                ViewBag.IdCategoria = listaCategorias(Producto.IdCategoriaProducto);
                 return View(Producto);
             }
             catch (Exception ex)

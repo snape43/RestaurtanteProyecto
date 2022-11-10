@@ -58,7 +58,7 @@ namespace Infraestructure.Repositories
             return oProducto;
         }
 
-        public Producto Save(Producto producto, string[] selectedCategorias)
+        public Producto Save(Producto producto)
         {
             int retorno = 0;
             Producto oProducto = null;
@@ -67,31 +67,31 @@ namespace Infraestructure.Repositories
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oProducto = GetProductoByID((int)producto.Id);
-                IRepositoryCategoriaProducto _RepositoryCategoriaProducto = new RepositoryCategoriaProducto();
+              //  IRepositoryCategoriaProducto _RepositoryCategoriaProducto = new RepositoryCategoriaProducto();
 
                 if (oProducto == null)
                 {
 
                     //Insertar
                     //Logica para agregar las categorias de los productos
-                    if (selectedCategorias != null)
+                  /*  if (selectedCategorias != null)
                     {
                         //Todo:duda
                         // producto.CategoriaProducto = new List<CategoriaProducto>();
                         foreach (var categoria in selectedCategorias)
                         {
-                            var categoriaToAdd = _RepositoryCategoriaProducto.GetCategoriaProductoByID(int.Parse(categoria));
+                         //   var categoriaToAdd = _RepositoryCategoriaProducto.GetCategoriaProductoByID(int.Parse(categoria));
                             ctx.CategoriaProducto.Attach(categoriaToAdd); //sin esto, EF intentará crear una categoría
                             //producto.CategoriaProducto.Add(categoriaToAdd);// asociar a la categoría existente con el libro
 
 
                         }
-                    }
+                    }*/
                     //Insertar a producto
                     ctx.Producto.Add(producto);
                     //SaveChanges
                     //guarda todos los cambios realizados en el contexto de la base de datos.
-                    retorno = ctx.SaveChanges();
+                  //  retorno = ctx.SaveChanges();
                     //retorna número de filas afectadas
                 }
                 else
@@ -100,12 +100,12 @@ namespace Infraestructure.Repositories
                     //Actualizar: 1,3,4
 
                     //Actualizar Libro
-                    ctx.Producto.Add(producto);
+                 //   ctx.Producto.Add(producto);
                     ctx.Entry(producto).State = EntityState.Modified;
-                    retorno = ctx.SaveChanges();
+                   // retorno = ctx.SaveChanges();
 
                     //Logica para actualizar Categorias
-                    var selectedCategoriasID = new HashSet<string>(selectedCategorias);
+                 //   var selectedCategoriasID = new HashSet<string>(selectedCategorias);
                     //TODO: collectiones categorias de los productos
                     //if (selectedCategorias != null)
                     //{
@@ -118,6 +118,7 @@ namespace Infraestructure.Repositories
                     //    retorno = ctx.SaveChanges();
                     //}
                 }
+                retorno = ctx.SaveChanges();
             }
 
             if (retorno >= 0)

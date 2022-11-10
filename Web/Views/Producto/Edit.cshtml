@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Save", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -106,6 +106,6 @@
     @Html.ActionLink("Regresar al listado", "IndexAdmin", null, new { @class = "btn btn-secondary float-end" })
 </div>
 
-@*@section Scripts {
+@section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
-    }*@
+    }

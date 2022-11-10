@@ -71,7 +71,7 @@ namespace Infraestructure.Models
 
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Precio de Producto")]
-        [Range(0, 999.99)]
+        [Range(0, 10000.99)]
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} deber númerico")]
 
         public Nullable<decimal> Precio { get; set; }

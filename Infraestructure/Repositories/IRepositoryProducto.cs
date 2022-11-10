@@ -11,7 +11,7 @@ namespace Infraestructure.Repositories
     {
         IEnumerable<Producto> GetProducto();
         Producto GetProductoByID(int id);
-        Producto Save(Producto producto, string[] selectedCategorias);
+        Producto Save(Producto producto);
 
     }
 }

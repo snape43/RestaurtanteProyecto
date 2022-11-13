@@ -21,8 +21,8 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     usuario = ctx.Usuario.
-                     Include("Rol").
-                    Where(p => p.Id == id).
+                     Include("TipoUsuario").
+                    Where(p => p.IdTipoUsuario == id).
                     FirstOrDefault<Usuario>();
                 }
                 return usuario;
@@ -49,7 +49,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    oUsuario = GetUsuarioByID(usuario.Id);
+                    oUsuario = GetUsuarioByID(usuario.IdTipoUsuario);
                     if (oUsuario == null)
                     {
                         ctx.Usuario.Add(usuario);
@@ -61,7 +61,7 @@ namespace Infraestructure.Repository
                     retorno = ctx.SaveChanges();
                 }
                 if (retorno >= 0)
-                    oUsuario = GetUsuarioByID(usuario.Id);
+                    oUsuario = GetUsuarioByID(usuario.IdTipoUsuario);
                 return oUsuario;
             }
             catch (DbUpdateException dbEx)
@@ -78,7 +78,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public Usuario GetUsuario(string Correo, string password)
+        public Usuario GetUsuario(string email, string password)
         {
             Usuario oUsuario = null;
             try
@@ -87,11 +87,11 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oUsuario = ctx.Usuario.
-                     Where(p => p.Correo.Equals(Correo) && p.Contraseña == password).
+                     Where(p => p.Correo.Equals(email) && p.Contraseña == password).
                     FirstOrDefault<Usuario>();
                 }
                 if (oUsuario != null)
-                    oUsuario = GetUsuarioByID(oUsuario.Id);
+                    oUsuario = GetUsuarioByID(oUsuario.IdTipoUsuario);
                 return oUsuario;
             }
             catch (DbUpdateException dbEx)

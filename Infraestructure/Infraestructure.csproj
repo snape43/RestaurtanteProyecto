@@ -121,12 +121,14 @@
     <Compile Include="Repositories\IRepositoryPedido.cs" />
     <Compile Include="Repositories\IRepositoryProducto.cs" />
     <Compile Include="Repositories\IRepositoryRestaurante.cs" />
+    <Compile Include="Repositories\IRepositoryUsuario.cs" />
     <Compile Include="Repositories\RepositoryCategoriaProducto.cs" />
     <Compile Include="Repositories\RepositoryEstadoMesa.cs" />
     <Compile Include="Repositories\RepositoryMesa.cs" />
     <Compile Include="Repositories\RepositoryPedido.cs" />
     <Compile Include="Repositories\RepositoryProducto.cs" />
     <Compile Include="Repositories\RepositoryRestaurante.cs" />
+    <Compile Include="Repositories\RepositoryUsuario.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>

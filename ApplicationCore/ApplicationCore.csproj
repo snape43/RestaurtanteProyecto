@@ -48,12 +48,15 @@
     <Compile Include="Services\IServicePedido.cs" />
     <Compile Include="Services\IServiceProducto.cs" />
     <Compile Include="Services\IServiceRestaurante.cs" />
+    <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\ServiceCategoriaProducto.cs" />
     <Compile Include="Services\ServiceEstadoMesa.cs" />
     <Compile Include="Services\ServiceMesa.cs" />
     <Compile Include="Services\ServicePedido.cs" />
     <Compile Include="Services\ServiceProducto.cs" />
     <Compile Include="Services\ServiceRestaurante.cs" />
+    <Compile Include="Services\ServiceUsuario.cs" />
+    <Compile Include="Utils\Cryptography.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infraestructure\Infraestructure.csproj">

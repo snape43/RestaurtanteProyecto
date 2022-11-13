@@ -26,24 +26,25 @@ namespace Web.Controllers
             try
             {
                 ModelState.Remove("Nombre");
-                ModelState.Remove("IdTipoUsuario");
+                ModelState.Remove("Apellidos");
+                ModelState.Remove("IdRol");
                 if (ModelState.IsValid)
                 {
-                    oUsuario = _ServiceUsuario.GetUsuario(usuario.Correo, usuario.Contraseña);
+                    oUsuario = _ServiceUsuario.GetUsuario(usuario.Email, usuario.Password);
                     if (oUsuario != null)
                     {
                         Session["User"] = oUsuario;
-                        Log.Info($"Accede{oUsuario.Nombre}" +
-                            $"con el tipo de usuario {oUsuario.TipoUsuario.Id}");
-                        TempData["mensaje"] = Utils.SweetAlertHelper.Mensaje("Login",
-                            "Usuario autenticado", Utils.SweetAlertMessageType.success);
+                        Log.Info($"Accede{oUsuario.Nombre} {oUsuario.Apellidos} " +
+                            $"con el rol {oUsuario.Rol.IdRol}");
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Login",
+                            "Usuario autenticado", Util.SweetAlertMessageType.success);
                         return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        Log.Warn($"Intento de inicio de secion{usuario.Correo}");
-                        ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Login",
-                            "Usuario no válido", Utils.SweetAlertMessageType.warning);
+                        Log.Warn($"Intento de inicio de secion{usuario.Email}");
+                        ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Login",
+                            "Usuario no válido", Util.SweetAlertMessageType.warning);
                     }
                 }
             }
@@ -57,31 +58,31 @@ namespace Web.Controllers
             }
             return View("Index");
         }
-        public ActionResult UnAuthorized()
+    public ActionResult UnAuthorized()
         {
             ViewBag.Message = "No autorizado";
             if (Session["User"] != null)
             {
                 Usuario usuario = Session["User"] as Usuario;
-                Log.Warn($"No autorizado {usuario.Correo}");
+                Log.Warn($"No autorizado {usuario.Email}");
             }
             return View();
         }
-        public ActionResult Logout()
+    public ActionResult Logout()
+    {
+        try
         {
-            try
-            {
                 Session["User"] = null;
-                return RedirectToAction("Index", "Login");
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
+            return RedirectToAction("Index","Login");
         }
+        catch (Exception ex)
+        {
+            Log.Error(ex, MethodBase.GetCurrentMethod());
+            TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+            // Redireccion a la captura del Error
+            return RedirectToAction("Default", "Error");
+        }
+    }
     }
 }

@@ -119,6 +119,7 @@ namespace Web.Controllers
         public ActionResult Create()
         {
             ViewBag.IdRestaurantes = listaRestaurante();
+            ViewBag.IdEstadosMesas = listaEstadoMesa();
            
             return View();
         }

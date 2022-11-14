@@ -12,6 +12,6 @@ namespace ApplicationCore.Services
         IEnumerable<Mesa> GetMesa();
         Mesa GetMesaByID(int id);
         IEnumerable<string> GetMesaNumero();
-        Mesa Save(Mesa mesa, string[] selectedRestaurantes);
+        Mesa Save(Mesa mesa);
     }
 }

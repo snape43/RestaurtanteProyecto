@@ -1,7 +1,7 @@
 ﻿@model Infraestructure.Models.Mesa
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title="CrearMesa";
 }
 
 
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.IdEstadoMesa,
-                   (SelectList)ViewBag.IdEstadosMesas,
+                   (SelectList)ViewBag.idEstadoMesa,
                    "Selecione un estado",
                    htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.IdEstadoMesa, "", new { @class = "text-danger" })

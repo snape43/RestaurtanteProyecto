@@ -20,8 +20,8 @@ namespace Infraestructure.Repositories
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Select * from EstadoMesa
-                    lista = ctx.EstadoMesa.ToList();
+                   
+                    lista = ctx.EstadoMesa.ToList<EstadoMesa>();
 
                 }
                 return lista;

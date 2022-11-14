@@ -51,14 +51,15 @@ namespace Infraestructure.Repositories
 
                 oMesa = ctx.Mesa.
                     Where(l => l.Id == id).
-                    Include("Restaurante").Include("EstadoMesa").Include("Restaurante.Producto.DetallePedido.Pedido").
+                   // Include("Restaurante").Include("EstadoMesa").Include("Restaurante.Producto.DetallePedido.Pedido").
+                    Include("Restaurante").Include("EstadoMesa").
                     FirstOrDefault();
 
             }
             return oMesa;
         }
 
-        public Mesa Save(Mesa mesa, string[] selectedRestaurantes)
+        public Mesa Save(Mesa mesa)
         {
             int retorno = 0;
             Mesa oMesa = null;
@@ -74,7 +75,7 @@ namespace Infraestructure.Repositories
 
                     //Insertar
                     //Logica para agregar las Restaurantes al Mesa
-                    if (selectedRestaurantes != null)
+                 /*   if (selectedRestaurantes != null)
                     {
 
                        // mesa.Restaurante = new List<Restaurante>();
@@ -86,7 +87,7 @@ namespace Infraestructure.Repositories
 
 
                         }
-                    }
+                    }*/
                     //Insertar Mesa
                     ctx.Mesa.Add(mesa);
                     //SaveChanges
@@ -105,7 +106,7 @@ namespace Infraestructure.Repositories
                     retorno = ctx.SaveChanges();
 
                     //Logica para actualizar Restaurantes
-                    var selectedRestaurantesID = new HashSet<string>(selectedRestaurantes);
+                 /*   var selectedRestaurantesID = new HashSet<string>(selectedRestaurantes);
                     if (selectedRestaurantes != null)
                     {
                       //  ctx.Entry(mesa).Collection(p => p.).Load();
@@ -115,7 +116,7 @@ namespace Infraestructure.Repositories
 
                         ctx.Entry(mesa).State = EntityState.Modified;
                         retorno = ctx.SaveChanges();
-                    }
+                    }*/
                 }
             }
 

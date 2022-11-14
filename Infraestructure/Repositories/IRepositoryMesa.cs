@@ -12,6 +12,6 @@ namespace Infraestructure.Repositories
         IEnumerable<Mesa> GetMesa();
         Mesa GetMesaByID(int id);
 
-        Mesa Save(Mesa mesa, string[] selectedCategorias);
+        Mesa Save(Mesa mesa);
     }
 }

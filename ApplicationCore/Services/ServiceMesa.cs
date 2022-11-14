@@ -27,10 +27,10 @@ namespace ApplicationCore.Services
             return repository.GetMesa().Select(x => x.NumeroMesa);
         }
 
-        public Mesa Save(Mesa mesa, string[] selectedRestaurantes)
+        public Mesa Save(Mesa mesa)
         {
             IRepositoryMesa repository = new RepositoryMesa();
-            return repository.Save(mesa, selectedRestaurantes);
+            return repository.Save(mesa);
         }
     }
 }

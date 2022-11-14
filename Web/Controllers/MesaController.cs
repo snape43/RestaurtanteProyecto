@@ -100,6 +100,21 @@ namespace Web.Controllers
             IEnumerable<EstadoMesa> listaEstadoMesa = _ServiceEstadoMesa.GetEstadoMesa();
             return new SelectList(listaEstadoMesa, "Id", "Descripcion", idEstadoMesa);
         }
+
+        private MultiSelectList listaEstadosByID(ICollection<EstadoMesa> estadoById = null)
+        {
+            IServiceEstadoMesa _ServiceEstadoMesa = new ServiceEstadoMesa();
+            IEnumerable<EstadoMesa> listaEstado = _ServiceEstadoMesa.GetEstadoMesa();
+            //Selecionar los estados/ Modificar
+            int[] listaEstadosSelect = null;
+            if (estadoById != null)
+            {
+                listaEstadosSelect = estadoById.Select(c => c.Id).ToArray();
+            }
+
+            return new MultiSelectList(listaEstado, "Id", "Descripcion", listaEstadosSelect);
+        }
+
         //private MultiSelectList listaRestaurantes(ICollection<Restaurante> restaurantes = null)
         //{
         //    IServiceRestaurante _ServiceRestaurante = new ServiceRestaurante();
@@ -118,24 +133,60 @@ namespace Web.Controllers
         // GET: Mesa/Create
         public ActionResult Create()
         {
-            ViewBag.IdRestaurantes = listaRestaurante();
-           
+            //Que recursos necesito para crear una mesa
+
+            //restaurante
+            ViewBag.IdRestaurante = listaRestaurante();
+            ViewBag.IdEstadosById = listaEstadosByID();
+            ViewBag.IdEstadoMesa = listaEstadoMesa();
+           //estadomesa
+
             return View();
         }
 
         // POST: Mesa/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Save(Mesa mesa)
         {
+          
+            IServiceMesa _ServiceMesa = new ServiceMesa();
             try
             {
-                // TODO: Add insert logic here
-                return View();
-                    
+                // Cuando es Insert Image viene en null porque se pasa diferente
+              /*  if (libro.Imagen == null)
+                {
+                    if (ImageFile != null)
+                    {
+                        ImageFile.InputStream.CopyTo(target);
+                        libro.Imagen = target.ToArray();
+                        ModelState.Remove("Imagen");
+                    }
+
+                }*/
+                if (ModelState.IsValid)
+                {
+                    Mesa oMesaI = _ServiceMesa.Save(mesa);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    //  Utils.Util.ValidateErrors(this);
+                    ViewBag.IdEstadoMesa = listaEstadoMesa(mesa.IdEstadoMesa);
+                    ViewBag.IdRestaurante = listaRestaurante(mesa.IdRestaurante);
+                   
+                    return View("Create", mesa);
+                }
+
+                return RedirectToAction("IndexAdmin");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Mesa";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
 

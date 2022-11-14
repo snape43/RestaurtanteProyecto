@@ -189,7 +189,7 @@ namespace Web.Controllers
         {
             // Que recursos necesito para actualizar un Producto
             ServiceProducto _ServiceProducto = new ServiceProducto();
-            Producto Producto = null;
+            Producto producto = null;
             try
             {
                 // Si va null
@@ -198,8 +198,8 @@ namespace Web.Controllers
                     return RedirectToAction("IndexAdmin");
                 }
                 //Producto 
-                Producto = _ServiceProducto.GetProductoByID(Convert.ToInt32(id));
-                if (Producto == null)
+                producto = _ServiceProducto.GetProductoByID(Convert.ToInt32(id));
+                if (producto == null)
                 {
                     TempData["Message"] = "No existe el Producto solicitado";
                     TempData["Redirect"] = "Producto";
@@ -212,8 +212,8 @@ namespace Web.Controllers
                 //ViewBag.IdRestaurantes = listaRestaurantes(Producto.IdCategoriaProducto);
 
                 //Categorías
-                ViewBag.IdCategoria = listaCategorias(Producto.IdCategoriaProducto);
-                return View(Producto);
+                ViewBag.IdCategoria = listaCategorias(producto.IdCategoriaProducto);
+                return View(producto);
             }
             catch (Exception ex)
             {

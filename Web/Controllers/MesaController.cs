@@ -152,17 +152,7 @@ namespace Web.Controllers
             IServiceMesa _ServiceMesa = new ServiceMesa();
             try
             {
-                // Cuando es Insert Image viene en null porque se pasa diferente
-              /*  if (libro.Imagen == null)
-                {
-                    if (ImageFile != null)
-                    {
-                        ImageFile.InputStream.CopyTo(target);
-                        libro.Imagen = target.ToArray();
-                        ModelState.Remove("Imagen");
-                    }
-
-                }*/
+            
                 if (ModelState.IsValid)
                 {
                     Mesa oMesaI = _ServiceMesa.Save(mesa);
@@ -195,7 +185,7 @@ namespace Web.Controllers
         {
             // Que recursos necesito para actualizar un Mesa
             ServiceMesa _ServiceMesa = new ServiceMesa();
-            Mesa Mesa = null;
+            Mesa mesa = null;
             try
             {
                 // Si va null
@@ -204,8 +194,8 @@ namespace Web.Controllers
                     return RedirectToAction("IndexAdmin");
                 }
                 //Mesa 
-                Mesa = _ServiceMesa.GetMesaByID(Convert.ToInt32(id));
-                if (Mesa == null)
+                mesa = _ServiceMesa.GetMesaByID(Convert.ToInt32(id));
+                if (mesa == null)
                 {
                     TempData["Message"] = "No existe el Mesa solicitado";
                     TempData["Redirect"] = "Mesa";
@@ -214,12 +204,14 @@ namespace Web.Controllers
                     return RedirectToAction("Default", "Error");
                 }
 
-                //Autor
-                ViewBag.IdRestaurantes = listaRestaurante();
+             
+                //ViewBag.IdRestaurantes = listaRestaurante();
+                ViewBag.IdEstadoMesa = listaEstadoMesa(mesa.IdEstadoMesa);
+                ViewBag.IdRestaurante = listaRestaurante(mesa.IdRestaurante);
 
-                //Categorías
+
                 // ViewBag.IdCategoria = listaCategorias(Mesa.Categoria);
-                return View(Mesa);
+                return View(mesa);
             }
             catch (Exception ex)
             {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Web.Security;
@@ -26,6 +27,7 @@ namespace Web.Controllers
             //lista de clientes
             //Lista de productos
             ViewBag.idCliente = listaClientes();
+            ViewBag.idMesas = listaMesas();
             //ViewBag.idProductos = listaProductos();
             ViewBag.PedidoDetalle = Carrito.Instancia.Items;
             //IEnumerable<Pedido> lista = null;
@@ -50,13 +52,14 @@ namespace Web.Controllers
 
             return new SelectList(listaClientes, "Id", "IdTipoUsuario");
         }
-
+            
         private SelectList listaMesas()
         {
+            //Lista de Mesas
             IServiceMesa _ServiceMesa = new ServiceMesa();
             IEnumerable<Mesa> listaMesas = _ServiceMesa.GetMesa();
 
-            return new SelectList(listaMesas, "Id", "IdMesa");
+            return new SelectList(listaMesas, "Id", "NumeroMesa");
 
         }
         private SelectList listaProductos()

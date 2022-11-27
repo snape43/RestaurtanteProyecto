@@ -8,7 +8,7 @@ html {
 
 .user_card {
     height: 400px;
-    width: 350px;
+    width: 600px;
     margin-top: auto;
     margin-bottom: auto;
     background: #f39c12;
@@ -71,6 +71,8 @@ html {
 .input_pass:focus {
     box-shadow: none !important;
     outline: 0px !important;
+    width:15px !important;
+ 
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {

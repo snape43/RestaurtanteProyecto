@@ -75,6 +75,7 @@ namespace Infraestructure.Models
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} deber númerico")]
 
         public Nullable<decimal> Precio { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}")]
 
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Estado")]

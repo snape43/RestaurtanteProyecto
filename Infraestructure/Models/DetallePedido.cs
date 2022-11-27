@@ -19,8 +19,9 @@ namespace Infraestructure.Models
         public int Id { get; set; }
         public int IdPedido { get; set; }
         public int IdProducto { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-        public Nullable<decimal> Subtotal { get; set; }
+        public int Cantidad { get; set; }
+        public decimal Precio { get; set; }
+        public decimal Subtotal { get; set; }
         public string Nota { get; set; }
     
         public virtual Pedido Pedido { get; set; }

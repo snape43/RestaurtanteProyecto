@@ -20,10 +20,24 @@
                         <div class="card-body">
                             <h5 class="card-title">@Html.DisplayFor(modelItem => item.Descripcion)</h5>
                             <p class="card-text"> <b>Categoría: </b>@Html.DisplayFor(modelItem => item.CategoriaProducto.NombreCategoria)</p>
-                     
+
                             @*<h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayNameFor(model => model.Autor): @Html.DisplayFor(modelItem => item.Autor.Nombre)</h6>*@
                             @*<h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.CategoriaProducto)</h6>*@
                             <p class="card-text">   @Html.DisplayNameFor(model => model.Precio): ₡@Html.DisplayFor(modelItem => item.Precio)</p>
+                            @Ajax.ActionLink("Agregar al carrito",
+                               "ordenarProducto",
+                               "Pedido",
+                               new
+                               {
+                                   idProducto = item.Id
+                               },
+                               new AjaxOptions
+                               {
+                                   UpdateTargetId = "cantidadProductos",
+                                   InsertionMode = InsertionMode.Replace,
+                                   HttpMethod = "GET",
+                               }, new { @class = "btn btn-warning" }
+                               )
                         </div>
                         <div class="card-footer d-grid">
                             <a>@Html.ActionLink("Detalles", "Details", new { id = item.Id })</a>
@@ -33,61 +47,7 @@
             }
         </div>
     </div>
-
-
 </div>
-
-
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ingredientes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Precio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoriaProducto.NombreCategoria)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Foto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingredientes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoriaProducto.NombreCategoria)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-    }*@
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryajax")
+}

@@ -14,6 +14,13 @@
     color:red;
 }
 
+.deshabilitar{
+    
+}
+.habilitar{
+
+}
+
 
 .center {
     display: block;
@@ -437,6 +444,7 @@ table.table td i {
     margin-top: 6px;
     font-size: 95%;
 }
+
 
 /*fin mantenimientos*/
 /*footer*/

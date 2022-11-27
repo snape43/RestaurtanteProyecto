@@ -8,7 +8,10 @@ namespace Infraestructure.Repositories
 {
     public interface IRepositoryPedido
     {
-        IEnumerable<Pedido> GetPedido();
         Pedido GetPedidoByID(int id);
+        IEnumerable<Pedido> GetPedido();
+        Pedido Save(Pedido pedido);
+
+        void GetPedidoCountDate(out string etiquetas, out string valores);
     }
 }

@@ -22,9 +22,13 @@
                         <img class="card-img-top center" src="../../Content/Public/img/mesa.jpg" alt="Card image" style="width:50%">
                         <div class="card-body text-center">
                             <p class="card-text">Mesa esta @Html.DisplayFor(modelItem => item.EstadoMesa.Descripcion)</p>
-                            <a href="#" class="btn btn-warning mb-10">Reservar</a>
-                            <a href="#" class="btn btn-success mb-10">Ocupada</a>
-                            <a href="#" class="btn btn-danger mb-10">Cerrar Cuenta</a>
+                            
+                            <button class="btn btn-warning mb-10 click_reservar" id="boton_reservar" >Reservar</button>
+                            <button class="btn btn-success mb-10 click_ocupado" id="boton_ocupado" disabled>Ocupado</button>
+                            <button class="btn btn-danger mb-10 click_cerrar" id="boton_cerrar" disabled>Cerrar Cuenta</button>
+                            <button class="btn btn-info mb-10 click_libre" id="boton_libre">Libre</button>
+                            
+
                         </div>
                         <div class="card-footer d-grid">
                             <a>@Html.ActionLink("Detalles", "Details", new { id = item.Id })</a>
@@ -37,4 +41,6 @@
         </div>
     </div>
 </div>
+
+
 

@@ -10,6 +10,8 @@ namespace ApplicationCore.Services
 {
     public class ServicePedido : IServicePedido
     {
+
+
         public IEnumerable<Pedido> GetPedido()
         {
             IRepositoryPedido repository = new RepositoryPedido();
@@ -21,5 +23,20 @@ namespace ApplicationCore.Services
             IRepositoryPedido repository = new RepositoryPedido();
             return repository.GetPedidoByID(id);
         }
+        public void GetPedidoCountDate(out string etiquetas1, out string valores1)
+        {
+            IRepositoryPedido repository = new RepositoryPedido();
+
+            repository.GetPedidoCountDate(out string etiquetas, out string valores);
+            etiquetas1 = etiquetas;
+            valores1 = valores;
+        }
+
+        public Pedido Save(Pedido pedido)
+        {
+            IRepositoryPedido repository = new RepositoryPedido();
+            return repository.Save(pedido);
+        }
     }
 }
+

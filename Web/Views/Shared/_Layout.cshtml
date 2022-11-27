@@ -6,36 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+
     <link rel="stylesheet" href="../../Content/Public/style.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
     <div class="pagewrap">
-        <nav id='menu'>
+        <nav id='menu' style="height:65px;">
             <div class="container">
                 <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
                 <ul>
                     <li><a>@Html.ActionLink("LA EXQUISITA", "Index", "Home") </a></li>
                     <li>
-                        <a class='dropdown-arrow'>Menu</a>
+                        <a class='dropdown-arrow'>Opciones</a>
                         <ul class='sub-menus'>
                             <li><a>@Html.ActionLink("Productos", "Index", "Producto")</a></li>
-                           
+                            <li><a>@Html.ActionLink("Pedidos", "Index", "Pedido") </a></li>
                         </ul>
                     </li>
-                    <li><a>@Html.ActionLink("Mesas", "Index", "Mesa") </a></li>
-                    <li><a>@Html.ActionLink("Pedidos", "Index", "Pedido") </a></li>
-
 
                     <li>
-                        <a class='dropdown-arrow'>Mantenimientos</a>
-                        <ul class='sub-menus'>
-                            <li><a>@Html.ActionLink("Producto",  "IndexAdmin" ,"Producto") </a></li>
-                            <li><a>@Html.ActionLink("Mesa", "IndexAdmin", "Mesa") </a></li>
-                        </ul>
-                    </li>
+                        @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador", "Mesero" }))
+                        {
+                            <a class='dropdown-arrow'>Mantenimientos</a>
+                            <ul class='sub-menus'>
+                                <li>
+                                    @Html.ActionLink("Productos", "IndexAdmin", "Producto", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Mesas", "IndexAdmin", "Mesa", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Estado Mesas", "Index", "Mesa") 
 
+</li>
+                            </ul>
+                    <li>
+                        @Html.ActionLink("Pedido", "IndexAdmin", "Pedido", null, new { @class = "dropdown-item" })
+                    </li>
+                            
+
+                        }
+                    </li>
                     <li>
                         <a class='dropdown-arrow'>Información</a>
                         <ul class='sub-menus'>
@@ -44,22 +55,54 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item" id="cantidadProducto">
+                        @Html.Partial("_PedidoCantidad")
+                    </li>
+                    @* Información usuario *@
+                    @{
+                        string nombre = "";
+                        string correo = "Perfil";
+                        string tipoUsuario = "";
 
+                        Infraestructure.Models.Usuario oUsuario;
+                        //Validar si existe en la sesión
+                        if (Session["User"] != null)
+                        {
+                            oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+                            if (oUsuario != null)
+                            {
+                                nombre = $"  {oUsuario.Nombre}";
+                                tipoUsuario = $"{oUsuario.TipoUsuario.Descripcion}";
+                                correo = oUsuario.Correo;
+                            }
+                        }
+                    }
 
+                    <ul class="dropdown-sub-menus">
+                        <li>
+                            @if (Session["User"] != null)
+                            {
+                                <div class="dropdown-item rightItems">
+                                    @* Nombre Usuario *@
+                                    @tipoUsuario: @nombre
+                                </div>
+                            }
 
-                    <li class="rightItems"><a>Usuario</a></li>
-                    <li class="rightItems"><a>Salir</a></li>
+                            <div class="dropdown-divider"></div>
+                            @if (Session["User"] == null)
+                            {
+                                @Html.ActionLink("Ingresar", "Index", "Login", null, new { @class = "dropdown-item rightItems" })
+                            }
+                            else
+                            {
 
+                                @Html.ActionLink("Salir", "Logout", "Login", null, new { @class = "dropdown-item rightItems " })
+                            }
+                        </li>
+                    </ul>
                 </ul>
-
-
-
-
-
             </div>
-
         </nav>
-
         <main>
             <div class="container body-content">
                 @RenderBody()
@@ -69,8 +112,6 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
-
 </body>
 @RenderSection("Scripts", required: false)
 

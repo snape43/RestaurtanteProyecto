@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Infraestructure.Models.Pedido>
+
+@{
+    ViewBag.Title = "IndexAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="mantenimientos ">
+    <h2 class="titulos">Pedidos</h2>
+
+    <div class="container-xl">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    @*<div class="row">
+                        <div class="col-sm-8 titulos sub_title"><h2>Mesa <b>Detalles</b></h2></div>
+                        <div class="col-12 col-sm-6">
+                            <button class="btn btn-warning add_new">
+                                <i class="fa fa-plus">@Html.ActionLink("Agregar mesa", "Create", "Mesa", null, new { @class = "add_new" })</i>
+                            </button>
+
+
+                        </div>
+                        <div class="col-sm-6 d-none">
+                            <div class="search-box">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control" placeholder="Buscar&hellip;">
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>
+                            Número de Pedido
+                        </th>
+                        <th>
+                            Fecha de Pedido
+                        </th>
+                        <th>
+                            Mesa
+                        </th>
+                        <th>
+                            Restaurante
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="resultado">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaPedido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Mesa.NumeroMesa)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Mesa.Restaurante.Nombre)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", "Pedido", new { id = item.Id })" class="view" title="Detalle" data-toggle="tooltip"><i class="fa fa-eye"></i></a>
+                                    <a href="@Url.Action("Edit", "Pedido", new { id = item.Id })" class="edit" title="Editar" data-toggle="tooltip"><i class="fa fa-pencil"></i></a>
+                                    <a href="#" class="delete" title="Borrar" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+
+
+                                    <!--<a href="" class="btn btn-primary"><i class="fa-solid fa-pen"></i> Editar</a>-->
+                                    @*@Html.ActionLink("Edit", "Edit", new { id = item.IdLibro }) |*@
+                                    <!--<a href="@Url.Action("Details", "Libro", new { id = item.Id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i> Detalle</a>-->
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
+
+                                    <!--|@Html.ActionLink("Eliminar", "Delete", new { id = item.Id })-->
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

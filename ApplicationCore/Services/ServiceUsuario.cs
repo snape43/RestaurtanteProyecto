@@ -31,6 +31,11 @@ namespace ApplicationCore.Services
             usuario.Contraseña = Cryptography.EncrypthAES(usuario.Contraseña);
             return repository.Save(usuario);
         }
+        public IEnumerable<Usuario> GetCliente()
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.GetCliente();
+        }
     }
 }
 

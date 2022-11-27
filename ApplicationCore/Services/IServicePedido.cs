@@ -11,5 +11,9 @@ namespace ApplicationCore.Services
     {
         IEnumerable<Pedido> GetPedido();
         Pedido GetPedidoByID(int id);
+        Pedido Save(Pedido pedido);
+
+        void GetPedidoCountDate(out string etiquetas, out string valores);
+
     }
 }

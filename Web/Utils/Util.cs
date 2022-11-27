@@ -42,6 +42,5 @@ namespace Web.Utils
             return lista;
 
         }
-
     }
 }

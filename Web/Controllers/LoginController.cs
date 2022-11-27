@@ -33,17 +33,17 @@ namespace Web.Controllers
                     if (oUsuario != null)
                     {
                         Session["User"] = oUsuario;
-                        Log.Info($"Accede{oUsuario.Nombre}" +
+                        Log.Info($"Accede{oUsuario.Nombre} " +
                             $"con el rol {oUsuario.TipoUsuario.Id}");
-                   //     TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Login",
-                     //       "Usuario autenticado", Utils.SweetAlertMessageType.success);
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Login",
+                            "Usuario autenticado", Util.SweetAlertMessageType.success);
                         return RedirectToAction("Index", "Home");
                     }
                     else
                     {
                         Log.Warn($"Intento de inicio de secion{usuario.Correo}");
-                        //ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Login",
-//"Usuario no válido", Util.SweetAlertMessageType.warning);
+                        ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Login",
+                            "Usuario no válido", Util.SweetAlertMessageType.warning);
                     }
                 }
             }

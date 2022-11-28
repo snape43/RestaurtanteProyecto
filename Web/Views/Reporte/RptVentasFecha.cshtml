@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "RptVentasFecha";
+    @* Layout = "~/Views/Shared/_Layout.cshtml";*@
+}
+
+<br />
+<h2>Reporte Ventas por Fecha</h2>
+
+<section class=" text-center">
+    <img src="~/Image/Logo.png" alt="Canelle" style="margin:auto; width:15%;" />
+</section>
+<br />
+<div class="row">
+    <br />
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Fecha inicio:</label>
+            <input type="date" id="fechaInicial" name="trip-start" class="form-control"
+                   value="" onchange="cambiarFecha()">
+            <label>Fecha fin:</label>
+            <input type="date" id="fechaFinal" name="trip-start" class="form-control"
+                   value="">
+        </div>
+
+    </div>
+</div>
+
+
+
+<br />
+<br />
+<button class="btn btn-primary" onclick="Descargar()" style="background-color: #EF280F; border-color: #EF280F; color: white; ">
+    <span class="glyphicon  glyphicon-floppy-save"></span>
+    Descargar Reporte
+</button>
+
+<button class="btn btn-success" onclick="Mostrar()" style="background-color: #E36B2C; border-color: #E36B2C; color: white;">
+    <span class="glyphicon  glyphicon-floppy-save"></span>
+    Mostrar Reporte
+</button>
+
+<hr />
+
+<iframe id="frmEntrada" style="width:100%; height:550px; "></iframe>
+
+@section scripts{
+    <script>
+        var fecha1 = $("#fechaInicial");
+        var fecha2 = $("#fechaFinal");
+
+        function Descargar() {
+
+            if (fecha1.val() == "" || fecha2.val() == "") {
+                alert("Debe seleccionar una fecha inicial y final!!!");
+                return;
+            }
+
+            window.open("/Reporte/DescargarReporteVentasFecha?fechaInicial=" + fecha1.val() + "&fechafinal=" + fecha2.val());
+        }
+        function Mostrar() {
+            var url = "@Url.Action("DescargarReporteVentasFecha", "Reporte")?fechaInicial=" + fecha1.val() + "&fechafinal=" + fecha2.val();
+
+            if (fecha1.val() == "" || fecha2.val() == "") {
+                alert("Debe seleccionar una fecha inicial y final!!!");
+                return;
+            }
+
+            $("#frmEntrada")
+                .attr("src", url).load();
+        }
+        function cambiarFecha() {
+            var fechaInicial = $("#fechaInicial").val();
+            $("#fechaFinal").val(fechaInicial);
+        }
+
+    </script>
+}
+

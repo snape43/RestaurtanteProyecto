@@ -38,7 +38,7 @@
                                     @Html.ActionLink("Mesas", "IndexAdmin", "Mesa", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Estado Mesas", "Index", "Mesa") 
 
-</li>
+                                </li>
                             </ul>
                     <li>
                         @Html.ActionLink("Pedido", "IndexAdmin", "Pedido", null, new { @class = "dropdown-item" })
@@ -47,6 +47,19 @@
 
                         }
                     </li>
+
+                   <li>
+                        <a class='dropdown-arrow'>Reportes</a>
+                        <ul class='sub-menus'>
+                            <li> @Html.ActionLink("Ventas por fechas", "RptVentasFecha", "Reporte", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Ventas por Tipo pago", "RptVentasPago", "Reporte", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("Ventas por Mesa,Mesero o Producto", "RptVentasUsuario", "Reporte")</li>
+
+                        </ul>
+                    </li>
+
+
+
                     <li>
                         <a class='dropdown-arrow'>Información</a>
                         <ul class='sub-menus'>

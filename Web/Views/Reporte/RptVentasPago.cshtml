@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "RptVentasPago";
+
+}
+
+<br />
+<h2>Reporte Ventas por Medio de Pago</h2>
+
+<section class=" text-center">
+    <img src="~/Image/Logo.png" alt="Canelle" style="margin:auto; width:15%;" />
+</section>
+<br />
+<div class="row">
+    <br />
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Fecha inicio:</label>
+            <input type="date" id="fechaInicial" name="trip-start" class="form-control"
+                   value="" onchange="cambiarFecha()">
+            <label>Fecha fin:</label>
+            <input type="date" id="fechaFinal" name="trip-start" class="form-control"
+                   value="">
+            <br /><label style="color:rebeccapurple;">Tipo de Pago</label>
+            <select id="comboParametro" class="form-control">
+                <option value="">Seleccione...</option>
+            </select>
+            
+        </div>
+
+    </div>
+</div>
+
+
+
+<br />
+<br />
+<button class="btn btn-primary" onclick="Descargar()" style="background-color: #EF280F; border-color: #EF280F; color: white; ">
+    <span class="glyphicon  glyphicon-floppy-save"></span>
+    Descargar Reporte
+</button>
+
+<button class="btn btn-success" onclick="Mostrar()" style="background-color: #E36B2C; border-color: #E36B2C; color: white;">
+    <span class="glyphicon  glyphicon-floppy-save"></span>
+    Mostrar Reporte
+</button>
+
+<hr />
+
+<iframe id="frmEntrada" style="width:100%; height:550px; "></iframe>
+
+@section scripts{
+    <script>
+
+        var fecha1 = $("#fechaInicial");
+        var fecha2 = $("#fechaFinal");
+        var pago = $("#comboParametro");
+
+        cargarCombo();
+
+        function cargarCombo() {
+            $.ajax({
+                url: "@Url.Action("GetTipoPago","Reporte")",
+                dataType: "JSON",
+                type:"GET"
+            }).done(function (resp) {
+                console.log(resp);
+                var data = JSON.parse(JSON.stringify(resp));
+                var opciones = "";
+                for (i = 0; i < data.resultado.length; i++) {
+                    opciones += "<option value='" + data.resultado[i] + "'>" + data.resultado[i] + "</option>";
+                }
+                $("#comboParametro").append(opciones);
+
+
+            }), fail(function () {
+                console.log("error");
+            });
+        }
+
+        function Descargar() {
+
+            if (fecha1.val() == "" || fecha2.val() == "" || pago.val() == "" ) {
+                alert("Debe seleccionar una fecha inicial, final y Tipo de Pago a Filtrar!!!");
+                return;
+            }
+
+            window.open("/Reporte/DescargarReporteVentasPago?fechaInicial=" + fecha1.val() + "&fechafinal=" + fecha2.val() + "&tipopago=" + pago.val());
+        }
+        function Mostrar() {
+            var url = "@Url.Action("DescargarReporteVentasPago", "Reporte")?fechaInicial=" + fecha1.val() + "&fechafinal=" + fecha2.val() + "&tipopago=" + pago.val();
+
+            if (fecha1.val() == "" || fecha2.val() == "" || pago.val() == "") {
+                alert("Debe seleccionar una fecha inicial, final y Tipo de Pago a Filtrar!!!");
+                return;
+            }
+
+            $("#frmEntrada")
+                .attr("src", url).load();
+        }
+        function cambiarFecha() {
+            var fechaInicial = $("#fechaInicial").val();
+            $("#fechaFinal").val(fechaInicial);
+        }
+
+    </script>
+}
+

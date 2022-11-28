@@ -19,7 +19,9 @@
             <th class="right">
                 SubTotal
             </th>
-            <th></th>
+            <th class="right">
+                Nota
+            </th>
         </tr>
 
         @foreach (var item in Model)
@@ -39,6 +41,9 @@
 
                 <td class="right">
                     @Html.DisplayFor(modelItem => item.Subtotal)
+                </td>
+                <td class="right">
+                    @Html.EditorFor(modelItem => item.Nota, new { htmlAttributes = new { @class = "form-control" } })
                 </td>
                 <td>
                     @Ajax.ActionLink("Eliminar",//Texto para el usuario

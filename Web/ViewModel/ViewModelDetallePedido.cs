@@ -14,6 +14,7 @@ namespace Web.ViewModel
         public int IdPedido { get; set; }
         public int IdProducto { get; set; }
         public int Cantidad { get; set; }
+        public string Nota { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Precio

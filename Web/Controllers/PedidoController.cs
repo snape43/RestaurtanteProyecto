@@ -183,7 +183,7 @@ namespace Web.Controllers
                     pedido.IdEstadoPedido = 4;
                     pedido.Observaciones = pedido.Observaciones;
                     pedido.FechaPedido = pedido.FechaPedido;
-                    //TODO:duda
+
                     var listaDetalle = Carrito.Instancia.Items;
                     //Agregar cada línea de detalle a la pedido
                     foreach (var item in listaDetalle)
@@ -191,8 +191,9 @@ namespace Web.Controllers
                         DetallePedido detallePedido = new DetallePedido();
                         detallePedido.IdPedido = item.IdPedido;
                         detallePedido.IdProducto = item.IdProducto;
-                        //detallePedido.Precio= item.Precio;
                         detallePedido.Cantidad = item.Cantidad;
+                        detallePedido.Subtotal = item.Subtotal;
+                        detallePedido.Nota = item.Nota;
 
                         pedido.DetallePedido.Add(detallePedido);
                        
@@ -219,6 +220,23 @@ namespace Web.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+        }
+
+        public ActionResult salvarFactura(Pedido pedido)
+        {
+            //detalle pedido subtotal
+            //detalle pedido id pedido
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return View();
+
         }
 
         //public ActionResult graficoPedido()

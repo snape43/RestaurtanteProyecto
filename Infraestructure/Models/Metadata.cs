@@ -86,7 +86,7 @@ namespace Infraestructure.Models
         [Display(Name = "Categoría del producto")]
 
         public virtual CategoriaProducto CategoriaProducto { get; set; }
-  
+
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
 
         [Display(Name = "Categoría del producto")]
@@ -121,7 +121,7 @@ namespace Infraestructure.Models
 
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Numero de Mesa")]
-         public string NumeroMesa { get; set; }
+        public string NumeroMesa { get; set; }
 
 
         [Display(Name = "Capacidad")]
@@ -137,7 +137,7 @@ namespace Infraestructure.Models
 
         [ForeignKey("IdEstadoMesa")]
         public virtual EstadoMesa EstadoMesa { get; set; }
-       
+
         public virtual ICollection<FacturaEncabezado> FacturaEncabezado { get; set; }
 
         [ForeignKey("IdRestaurante")]
@@ -157,7 +157,7 @@ namespace Infraestructure.Models
         public string Telefono { get; set; }
 
         public virtual ICollection<Mesa> Mesa { get; set; }
-       
+
         public virtual ICollection<Producto> Producto { get; set; }
     }
 
@@ -171,13 +171,13 @@ namespace Infraestructure.Models
         public bool Estado { get; set; }
         public int IdTipoUsuario { get; set; }
 
-       
+
         public virtual ICollection<FacturaEncabezado> FacturaEncabezado { get; set; }
-      
+
         public virtual ICollection<FacturaEncabezado> FacturaEncabezado1 { get; set; }
-        
+
         public virtual ICollection<Pedido> Pedido { get; set; }
-       
+
         public virtual ICollection<Pedido> Pedido1 { get; set; }
 
         [ForeignKey("IdTipoUsuario")]

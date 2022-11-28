@@ -10,52 +10,48 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <div class="row">
-        <div class="col-6">
-            <div class="form-group">
-                @Html.LabelFor(model => model.FechaPedido, htmlAttributes: new { @class = "col-form-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.FechaPedido, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
-
-                </div>
-            </div>
-
-        </div>
-        <div class="col-md-6">
-            <div class="col-md-6">
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-6">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.IdMesa, htmlAttributes: new { @class = "col-form-label " })
-                    <div class="col-md-12">
-                        @Html.DropDownListFor(model => model.IdMesa, (SelectList)ViewBag.idMesas, " Seleccione una mesa ", htmlAttributes: new { @class = "form-select form-control " })
-                        @Html.ValidationMessageFor(model => model.IdMesa, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-4">
-
-        <div class="col-md-8">
-            <div class="col-12">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "col-form-label " })
+                    @Html.LabelFor(model => model.FechaPedido, htmlAttributes: new { @class = "col-form-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.Observaciones, htmlAttributes: new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.FechaPedido, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
 
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IdMesa, htmlAttributes: new { @class = "col-form-label " })
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(model => model.IdMesa, (SelectList)ViewBag.idMesas, " Seleccione una mesa ", htmlAttributes: new { @class = "form-select form-control " })
+                            @Html.ValidationMessageFor(model => model.IdMesa, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-               
+        <div class="row mt-4">
+
+            <div class="col-md-8">
+                <div class="col-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "col-form-label " })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Observaciones, htmlAttributes: new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
+
     </div>
 
-</div>
-  
     <hr /><span class="glyphicons glyphicons-hand-left"></span>
     <div id="resultadoDetalle">
         @if (Web.ViewModel.Carrito.Instancia.Items.Count() > 0)

@@ -133,5 +133,68 @@ namespace Web.Controllers
             return Json(new { resultado = cats }, JsonRequestBehavior.AllowGet);
         }
 
+
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Mesero)]
+        public ActionResult RptVentasUsuario()
+        {
+
+            return View();
+
+        }
+        public ActionResult DescargarReporteVentasUsuario(String fechaInicial, String fechafinal,string pmesero)
+        {
+            try
+            {
+                var rpt = new ReportClass();
+                rpt.FileName = Server.MapPath("/Reports/ReporteVentasUsuario.rpt");
+                rpt.Load();
+
+                rpt.SetParameterValue("PIfecha", fechaInicial);
+                rpt.SetParameterValue("PFfecha", fechafinal);
+                rpt.SetParameterValue("Pmesero", pmesero);
+               
+
+                // Report connection
+                var connInfo = CrystalReportsRest.GetConnectionInfo();
+                TableLogOnInfo logonInfo = new TableLogOnInfo();
+                Tables tables;
+                tables = rpt.Database.Tables;
+                foreach (Table table in tables)
+                {
+                    logonInfo = table.LogOnInfo;
+                    logonInfo.ConnectionInfo = connInfo;
+                    table.ApplyLogOnInfo(logonInfo);
+                }
+
+                Response.Buffer = false;
+                Response.ClearContent();
+                Response.ClearHeaders();
+
+                Stream stream = rpt.ExportToStream(ExportFormatType.PortableDocFormat);
+                rpt.Dispose();
+                rpt.Clone();
+                return new FileStreamResult(stream, "application.pdf");
+            }
+            catch (Exception ex)
+            {
+
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+
+        }
+
+        public JsonResult GetMesero()
+        {
+            MyContext ctx = new MyContext();
+            var cats = ctx.Usuario.Select(x => x.Nombre).ToList();
+            return Json(new { resultado = cats }, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

@@ -48,16 +48,19 @@
                         }
                     </li>
 
-                   <li>
+                <li>
+                    @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador", "Mesero" }))
+                    {
                         <a class='dropdown-arrow'>Reportes</a>
                         <ul class='sub-menus'>
+
                             <li> @Html.ActionLink("Ventas por fechas", "RptVentasFecha", "Reporte", null, new { @class = "dropdown-item" })</li>
                             <li>@Html.ActionLink("Ventas por Tipo pago", "RptVentasPago", "Reporte", null, new { @class = "dropdown-item" })</li>
-                            <li>@Html.ActionLink("Ventas por Mesa,Mesero o Producto", "RptVentasUsuario", "Reporte")</li>
+                            <li>@Html.ActionLink("Ventas por Mesa o Mesero", "RptVentasUsuario", "Reporte")</li>
 
-                        </ul>
+                        </ul>  }
                     </li>
-
+                  
 
 
                     <li>

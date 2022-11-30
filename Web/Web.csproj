@@ -169,6 +169,12 @@
       <DependentUpon>ReporteVentasTipo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ReporteVentasUsuario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteVentasUsuario.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Security\AutorizeView.cs" />
     <Compile Include="Security\CustomAuthenticationFilter.cs" />
     <Compile Include="Security\CustomAuthorizeAttribute.cs" />
@@ -298,6 +304,7 @@
     <Content Include="Views\Pedido\Index.cshtml" />
     <Content Include="Views\Reporte\RptVentasFecha.cshtml" />
     <Content Include="Views\Reporte\RptVentasPago.cshtml" />
+    <Content Include="Views\Reporte\RptVentasUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -326,6 +333,10 @@
     <EmbeddedResource Include="Reports\ReporteVentasTipo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteVentasTipo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReporteVentasUsuario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteVentasUsuario.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
